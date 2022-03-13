@@ -2,7 +2,7 @@
     <div :class="['room', { 'chat-open': chatOpen }]">
         <Loading type="room" v-if="!playerOptions"></Loading>
 
-        <div class="users" v-if="player.video" :class="{ 'show': !player.controlsHidden }">
+        <div class="users" v-if="player.video" :class="{ 'show': player.paused }">
             <div class="count">
                 <ion-icon name="eye-outline"></ion-icon> {{ users.length }}
             </div>
