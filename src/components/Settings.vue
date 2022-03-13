@@ -8,6 +8,13 @@
             <div class="settings">
                 <div class="setting">
                     <div class="label">
+                        <ion-icon name="play"></ion-icon>
+                        Allow Control
+                    </div>
+                    <Select v-model="settings.allowControl" :options="[{name: 'Yes', value: true}, {name: 'No', value: false}]"></Select>
+                </div>
+                <div class="setting">
+                    <div class="label">
                         <ion-icon name="language"></ion-icon>
                         {{ $t('components.settings.lang') }}
                     </div>
@@ -80,6 +87,9 @@ export default {
         'settings.locale'(value) {
             store.dispatch('settings/updateLocale', value);
             this.$i18n.locale = value;
+        },
+        'settings.allowControl'(value) {
+            store.dispatch('settings/updateAllowControl', value);
         }
     },
     methods: {

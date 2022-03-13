@@ -87,7 +87,8 @@ export default {
                 logo: String,
                 background: String,
             },
-            isOwner: Boolean
+            isOwner: Boolean,
+            allowControl: Boolean
         }
     },
     computed: mapGetters({

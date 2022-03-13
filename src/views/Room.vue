@@ -73,7 +73,8 @@ export default {
                 autoSync: store.getters['player/autoSync'],
                 buffering: store.getters['player/buffering']
             }
-        }
+        },
+        settings: () => store.state.settings
     },
     watch: {
         'client.room'() {
@@ -86,7 +87,7 @@ export default {
 
             if (!this.playerOptions) {
                 const videoUrl = await StremioService.createStream(stream);
-                this.playerOptions = { src: videoUrl, hls: null, meta, isOwner: this.client.user.id === owner };
+                this.playerOptions = { src: videoUrl, hls: null, meta, isOwner: this.client.user.id === owner, allowControl: this.settings.allowControl };
 
                 HlsService.createPlaylist(videoUrl).then(playlistUrl => {
                     this.playerOptions = {
