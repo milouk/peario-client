@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+ peario:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    networks:
+      - traefik_public
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.peario.loadbalancer.server.port=8080
+      - traefik.http.routers.peario-http.entrypoints=http
+      - traefik.http.routers.peario-http.rule=Host(`peario.duckdns.org`)
+      - traefik.http.routers.peario-https.entrypoints=https
+      - traefik.http.routers.peario-https.rule=Host(`peario.duckdns.org`)
+      - traefik.http.routers.peario-https.tls=true
+      - traefik.http.routers.peario-https.tls.certresolver=le
+      - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
+      - traefik.http.routers.peario-http.middlewares=https-redirect
+
+
+networks:
+  traefik_public:
+      external: True
